@@ -1,0 +1,24 @@
+name: Build KernelSU module
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build module
+        run: |
+          chmod +x tools/build.sh
+          ./tools/build.sh
+
+      - name: Upload module
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScenePortHider-module
+          path: hideSceneport_module.zip
+concurrency: 
